@@ -1,14 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './index.css';
+import BaseLayout from './components/BaseLayout';
+import HomePage from './pages/HomePage';
+import ErrorPage from './pages/ErrorPage';
+
 function App() {
     return (
-        <div>
-            <p className="text-4xl">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-                provident, voluptatibus ipsum ea quisquam accusamus impedit
-                sapiente commodi obcaecati veritatis incidunt. Blanditiis,
-                dolorum reprehenderit voluptatibus sequi inventore obcaecati
-                temporibus ex.
-            </p>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<BaseLayout />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="/*" element={<ErrorPage />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
