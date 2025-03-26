@@ -68,6 +68,7 @@ const SettingsDrawer = ({
                             type="number"
                             id="tokenMax"
                             placeholder="3"
+                            min={1}
                             value={chatRequest.top_k}
                             className="w-auto max-w-32"
                             onChange={handleTokenChange}

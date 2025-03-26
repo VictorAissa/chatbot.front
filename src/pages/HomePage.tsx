@@ -36,7 +36,7 @@ const HomePage = () => {
         }
 
         cancelStreamRef.current = ApiService.streamChat(
-            { query: request.query.trim() },
+            request,
             (token) => {
                 setResponse((prev) => prev + token);
             },
@@ -64,12 +64,12 @@ const HomePage = () => {
     }, [request]);
 
     return (
-        <div className="flex flex-col  gap-8">
-            <div className="flex flex-col">
+        <div className="flex flex-col p-6 md:p-8 xl:p-12 gap-8">
+            <div className="flex flex-col items-center">
                 <h1 className="text-3xl font-bold mb-4 md:mb-6 xl:mb-8 text-center">
                     Une question sur la montagne ?
                 </h1>
-                <div className="rounded-lg shadow-md p-6 mb-4 md:mb-6 border-1">
+                <div className="w-3/4 max-w-[900px] rounded-lg shadow-md p-6 mb-4 md:mb-6 border-1">
                     <textarea
                         className="w-full resize-none focus:outline-none scrollbar-hide"
                         placeholder="Posez votre question ici..."
