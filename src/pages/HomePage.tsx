@@ -1,11 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '../components/ui/button';
-import apiService from '../services/ApiService';
+import { ChatRequest } from '../services/ApiService';
+import ApiService from '../services/ApiService';
 import ReactMarkdown from 'react-markdown';
+import SettingsDrawer from '../components/SettingsDrawer';
 
 const HomePage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [query, setQuery] = useState<string>('');
+    const [request, setRequest] = useState<ChatRequest>({
+        query: '',
+        use_rag: true,
+        top_k: 3,
+        temperature: 0.7,
+    });
     const [response, setResponse] = useState<string>('');
     const cancelStreamRef = useRef<() => void | null>(null);
 
@@ -18,7 +26,7 @@ const HomePage = () => {
     }, []);
 
     const handleSubmit = () => {
-        if (!query.trim()) return;
+        if (!request.query.trim()) return;
 
         setIsLoading(true);
         setResponse('');
@@ -27,8 +35,8 @@ const HomePage = () => {
             cancelStreamRef.current();
         }
 
-        cancelStreamRef.current = apiService.streamChat(
-            { query: query.trim() },
+        cancelStreamRef.current = ApiService.streamChat(
+            { query: request.query.trim() },
             (token) => {
                 setResponse((prev) => prev + token);
             },
@@ -44,6 +52,17 @@ const HomePage = () => {
         );
     };
 
+    const handleSettingsChange = (field: string, value: any) => {
+        setRequest((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
+
+    useEffect(() => {
+        console.log(request);
+    }, [request]);
+
     return (
         <div className="flex flex-col  gap-8">
             <div className="flex flex-col">
@@ -55,18 +74,29 @@ const HomePage = () => {
                         className="w-full resize-none focus:outline-none scrollbar-hide"
                         placeholder="Posez votre question ici..."
                         rows={2}
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
+                        value={request.query}
+                        onChange={(e) =>
+                            setRequest((previous) => ({
+                                ...previous,
+                                query: e.target.value,
+                            }))
+                        }
                         disabled={isLoading}
                     />
                 </div>
-                <Button
-                    className="px-4 self-center"
-                    onClick={handleSubmit}
-                    disabled={isLoading || !query.trim()}
-                >
-                    {isLoading ? 'Chargement...' : 'Envoyer'}
-                </Button>
+                <div className="flex justify-center gap-12 cursor-pointer">
+                    <Button
+                        onClick={handleSubmit}
+                        disabled={isLoading || !request.query.trim()}
+                    >
+                        {isLoading ? 'Chargement...' : 'Envoyer'}
+                    </Button>
+                    <SettingsDrawer
+                        chatRequest={request}
+                        disabled={isLoading}
+                        onChange={handleSettingsChange}
+                    />
+                </div>
             </div>
             {response && (
                 <div

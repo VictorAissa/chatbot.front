@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -8,8 +9,9 @@ import {
 } from './ui/navigation-menu';
 
 const Header = () => {
-    const handleInstructionsClick = () => alert('instructions');
-    const handleSettingsClick = () => alert('settings');
+    const navigate = useNavigate();
+    const handleAboutClick = () => navigate('/about');
+    const handleChatClick = () => navigate('/');
 
     return (
         <header className="flex justify-between px-10 py-4">
@@ -22,15 +24,11 @@ const Header = () => {
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
                             <NavigationMenuContent>
-                                <NavigationMenuLink
-                                    onClick={handleInstructionsClick}
-                                >
-                                    Instructions
+                                <NavigationMenuLink onClick={handleChatClick}>
+                                    Chat
                                 </NavigationMenuLink>
-                                <NavigationMenuLink
-                                    onClick={handleSettingsClick}
-                                >
-                                    Settings
+                                <NavigationMenuLink onClick={handleAboutClick}>
+                                    About
                                 </NavigationMenuLink>
                             </NavigationMenuContent>
                         </NavigationMenuItem>

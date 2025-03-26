@@ -18,13 +18,6 @@ class ApiService {
         this.baseUrl = import.meta.env.VITE_API_URL;
     }
 
-    /**
-     * @param request Les paramètres de la requête
-     * @param onToken Callback appelé pour chaque token reçu
-     * @param onError Callback appelé en cas d'erreur
-     * @param onComplete Callback appelé quand le stream est terminé
-     * @returns Une fonction pour annuler le stream
-     */
     streamChat(
         request: ChatRequest,
         onToken: (token: string) => void,

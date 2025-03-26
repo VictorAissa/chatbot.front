@@ -3,6 +3,7 @@ import './index.css';
 import BaseLayout from './components/BaseLayout';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<BaseLayout />}>
                     <Route index element={<HomePage />} />
+                    <Route path="/about" element={<AboutPage />} />
                     <Route path="/*" element={<ErrorPage />} />
                 </Route>
             </Routes>
