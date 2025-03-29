@@ -46,6 +46,11 @@ const AboutPage = () => {
                             </li>
                         </ul>
                     </div>
+                    <p>
+                        Attention, la première requete peut être très longue le
+                        temps que le container de l'API déployée se lance avec
+                        ses applicatifs.
+                    </p>
                 </div>
             </div>
         </div>
