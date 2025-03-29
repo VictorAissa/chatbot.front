@@ -140,3 +140,7 @@
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 3px;
 }
+
+.bg-mountain {
+    background-image: url('./assets/mads-schmidt-rasmussen-6YmzwamGzCg-unsplash.avif');
+}

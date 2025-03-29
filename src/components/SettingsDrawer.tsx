@@ -44,13 +44,13 @@ const SettingsDrawer = ({
                     className="cursor-pointer"
                     disabled={disabled}
                 >
-                    Settings
+                    Réglages
                 </Button>
             </DrawerTrigger>
             <DrawerContent className="p-8 md:p-12">
                 <DrawerHeader>
                     <DrawerTitle className="flex justify-center text-xl">
-                        Settings
+                        Réglages
                     </DrawerTitle>
                 </DrawerHeader>
                 <div className="flex flex-col gap-8">
@@ -83,7 +83,7 @@ const SettingsDrawer = ({
                             id="temperature"
                             defaultValue={[0.7]}
                             min={0.1}
-                            max={4}
+                            max={2}
                             step={0.1}
                             onValueChange={handleTemperatureChange}
                             className="w-full max-w-64"
