@@ -11,6 +11,18 @@ export interface ChatStreamResponse {
     error?: string;
 }
 
+export interface HealthResponse {
+    status: string;
+    version: string;
+    collection_stats: CollectionStats;
+}
+
+export interface CollectionStats {
+    collection_name: string;
+    document_count: string;
+    persist_directory: string;
+}
+
 class ApiService {
     private baseUrl: string;
 
@@ -81,18 +93,18 @@ class ApiService {
             eventSource.close();
         };
     }
-
-    /**
-     * Alternative en utilisant fetch pour les navigateurs qui ne supportent pas EventSource
-     */
-    async postChatRequest(request: ChatRequest): Promise<Response> {
-        return fetch(`${this.baseUrl}/chat/stream`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(request),
-        });
+      
+    async getHealth(): Promise<HealthResponse> {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/`);
+            if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Health check failed:', error);
+            throw error;
+        }
     }
 }
 

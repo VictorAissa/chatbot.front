@@ -47,9 +47,10 @@ const AboutPage = () => {
                         </ul>
                     </div>
                     <p>
-                        Attention, la première requete peut être très longue le
-                        temps que le container de l'API déployée se lance avec
-                        ses applicatifs.
+                        Au premier chargement l'API est contactée pour mettre en
+                        route le container et obtenir un compte rendu de l'état
+                        de l'application. Cet appel peut prendre plusieurs
+                        minutes.
                     </p>
                 </div>
             </div>

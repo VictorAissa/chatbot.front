@@ -3,7 +3,6 @@ import {
     NavigationMenu,
     NavigationMenuContent,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
 } from './ui/navigation-menu';
@@ -24,12 +23,20 @@ const Header = () => {
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
                             <NavigationMenuContent>
-                                <NavigationMenuLink onClick={handleChatClick}>
-                                    Chat
-                                </NavigationMenuLink>
-                                <NavigationMenuLink onClick={handleAboutClick}>
-                                    About
-                                </NavigationMenuLink>
+                                <ul className="flex flex-col p-2 min-w-40">
+                                    <li
+                                        className="p-2 cursor-pointer hover:bg-gray-100"
+                                        onClick={handleChatClick}
+                                    >
+                                        Chat
+                                    </li>
+                                    <li
+                                        className="p-2 cursor-pointer hover:bg-gray-100"
+                                        onClick={handleAboutClick}
+                                    >
+                                        About
+                                    </li>
+                                </ul>
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                     </NavigationMenuList>

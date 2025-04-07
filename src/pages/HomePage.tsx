@@ -15,7 +15,7 @@ const HomePage = () => {
         temperature: 0.7,
     });
     const [response, setResponse] = useState<string>('');
-    const cancelStreamRef = useRef<() => void | null>(null);
+    const cancelStreamRef = useRef<(() => void) | null>(null);
 
     useEffect(() => {
         return () => {
@@ -24,6 +24,13 @@ const HomePage = () => {
             }
         };
     }, []);
+
+    const handleSettingsChange = (field: string, value: any) => {
+        setRequest((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
 
     const handleSubmit = () => {
         if (!request.query.trim()) return;
@@ -51,17 +58,6 @@ const HomePage = () => {
             }
         );
     };
-
-    const handleSettingsChange = (field: string, value: any) => {
-        setRequest((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
-    };
-
-    useEffect(() => {
-        console.log(request);
-    }, [request]);
 
     return (
         <div className="flex flex-col flex-grow p-6 md:p-8 xl:p-12 gap-8">
