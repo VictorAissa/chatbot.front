@@ -30,7 +30,7 @@ const AboutPage = () => {
                                 obtenues depuis le dataset et d'enrichir la
                                 requete avec. Dans le cas contraire les requetes
                                 sont directement effectuées vers le modèle sans
-                                utilisations des données apportées.
+                                utilisation des données apportées.
                             </li>
                             <li>
                                 Le nombre max de tokens limite le nombre
